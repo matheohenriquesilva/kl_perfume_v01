@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static 'usuarios/img/favicon2.ico' %}" type="image/x-icon">
+    <title>CADASTRO DE USUÁRIO</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <!-- COMEÇO DA NAVBAR -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'usuarios/img/favicon2.png' %}" width=100 height="100" class="d-inline-block align-center" alt="">
+            KL_PERFUME
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <img src="{% static 'usuarios/img/login.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cadastro' %}">
+                        <img src="{% static 'usuarios/img/cad.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Se-Cadastrar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#modalAdmin">
+                        <img src="{% static 'usuarios/img/do-utilizador.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Admin
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- FIM DA NAVBAR -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Conteúdo aqui -->
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <h6 class="nav-link text-secondary">
+                        <img src="{% static 'usuarios/img/relatorio.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        DASHBOARD
+                    </h6>
+                    <a class="nav-link active" id="navsItem1" data-toggle="pill" href="#item1" role="tab" aria-controls="v-pills-home" aria-selected="true">CADASTRO</a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <!-- Conteúdo aqui -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <br>
+                        <h4>CADASTRE-SE NO SISTEMA.</h4>
+                        <div>
+                            <hr>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {{message.tags}}">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <form action="{% url 'cadastro' %}"  method="POST" autocomplete="off">{% csrf_token %}
+                                <div>
+                                    <div class="form-group col-md-4">
+                                        <label for="iusuario">Usuario:</label>
+                                        <input type="text" class="form-control" name="usuario" id="iusuario">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inome">Nome:</label>
+                                        <input type="text" class="form-control" name="nome" id="inome">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="isobrenome">Sobrenome:</label>
+                                        <input type="text" class="form-control" name="sobrenome" id="isobrenome">
+                                    </div>
+                                    <div class="form-group col-md-4",>
+                                        <label for="iemail">E-mail:</label>
+                                        <input type="email" class="form-control" name="email" id="iemail">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="isenha">Senha:</label>
+                                        <input type="password" class="form-control" name="senha" id="isenha">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="iconfirmar">Confirmar Senha:</label>
+                                        <input type="password" class="form-control" name="confirmar" id="iconfirmar">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="submit" value="SALVAR" class="btn btn-primary">
+                                        <a href="{% url 'login' %}" class="text-secondary">Já tenho uma conta.</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMEÇO DO RODAPÉ -->
+    <footer>
+        <div class="container-fluid bg-info">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center bg-light">Desenvolvido por Matheo Henrique &copy;2024 (KL_PERFUME v0.01)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FIM DO RODAPÉ -->
+
+    <!-- INICIO Modal -->
+    <div class="modal fade" id="modalAdmin" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalLongoExemplo">MODO DE ADMINISTRADOR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a>Está aréa é restritamentente destinada a realizar alterações criticas do sistema.</a>
+                    <h6>DESEJA CONTNUAR?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" role="button" href="{% url 'controlador' %}">ENTRAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM Modal -->
+
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

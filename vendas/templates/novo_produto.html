@@ -1,0 +1,253 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static 'usuarios/img/favicon2.ico' %}" type="image/x-icon">
+    <title>NOVO PRODUTO</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+    <!-- COMEÇO DA NAVBAR -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'usuarios/img/favicon2.png' %}" width=100 height="100" class="d-inline-block align-center" alt="">
+            KL_PERFUME
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <img src="{% static 'usuarios/img/botao-home.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Home <span class="sr-only">(página atual)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#modalAdmin">
+                        <img src="{% static 'usuarios/img/do-utilizador.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Admin
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarClientes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarClientes">
+                        <a class="dropdown-item" href="{% url 'novo_cliente' %}">Cadastrar</a>
+                        <a class="dropdown-item" href="{% url 'listar_clientes' %}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarVendas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Vendas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarVendas">
+                        <a class="dropdown-item" href="{% url 'nova_venda' 0 %}">Cadastrar</a>
+                        <a class="dropdown-item" href="{% url 'listar_vendas' %}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarProdutos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produtos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarProdutos">
+                        <a class="dropdown-item" href="{% url 'novo_produto' %}">Cadastrar</a>
+                        <a class="dropdown-item" href="{% url 'listar_produtos' %}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarBoletos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Boletos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarBoletos">
+                        <a class="dropdown-item" href="{% url 'novo_boleto' %}">Cadastrar</a>
+                        <a class="dropdown-item" href="{% url 'listar_boletos' %}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white bg-dark rounded">{{request.user}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#modalSair">
+                        <img src="{% static 'usuarios/img/sair.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        Sair
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 w-25">
+                <input class="form-control mr-sm-1 w-75" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="pesquisar" disabled>
+                <button class="btn btn-outline-black my-2 my-sm-0" type="submit">
+                    <img src="{% static 'usuarios/img/busca.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                </button>
+            </form>
+        </div>
+    </nav>
+    <!-- FIM DA NAVBAR -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Conteúdo aqui -->
+                <h1 class="nav-link">
+                    <img src="{% static 'usuarios/img/menu-aberto.png' %}" width=50 height="50" class="d-inline-block align-center" alt="">
+                    Menu
+                </h1>
+                <hr>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <h6 class="nav-link text-secondary">
+                        <img src="{% static 'usuarios/img/relatorio.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        DASHBOARD
+                    </h6>
+                    <a class="nav-link active" id="navsItem1" data-toggle="pill" href="#item1" role="tab" aria-controls="v-pills-home" aria-selected="true">Novo Produto</a>
+                    <h6 class="nav-link text-secondary text-white">
+                        <img src="{% static 'usuarios/img/apps.png' %}" width=25 height="25" class="d-inline-block align-center" alt="">
+                        APPS
+                    </h6>
+                    <a class="nav-link bg-dark text-white" href="{% url 'caixa' %}">Caixa</a>
+                    <a class="nav-link bg-info text-white" href="{% url 'venda' %}">Vendas</a>
+                    <a class="nav-link bg-dark text-white" href="{% url 'cliente' %}">Clientes</a>
+                    <a class="nav-link bg-info text-white" href="{% url 'produto' %}">Produtos</a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <!-- Conteúdo aqui -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                        <br>
+                        <h1>ADICIONE UM NOVO PRODUTO.</h1>
+                        <div>
+                            <hr>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {{message.tags}}">
+                                        {{message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <form action="{% url 'novo_produto' %}"  method="POST" autocomplete="off">{% csrf_token %}
+                                <div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inome">NOME:</label>
+                                        <input type="text" class="form-control" name="nome" id="inome">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="imarca">MARCA:</label>
+                                        <select class="form-control" name="marca" id="imarca">
+                                            {% for marca  in marcas %}
+                                            <option value="{{marca.id}}">{{marca}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="itipo">TIPO:</label>
+                                        <select class="form-control" name="tipo" id="itipo">
+                                            {% for tipo in tipos %}
+                                            <option value="{{tipo.id}}">{{tipo}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="ivalor_compra">VALOR DE COMPRA: R$</label>
+                                        <input type="number" class="form-control" name="valor_compra" id="ivalor_compra" min="0.00" max="10000.00" step="0.01" placeholder="0.00">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="ivalor_venda">VALOR DE VENDA: R$</label>
+                                        <input type="number" class="form-control" name="valor_venda" id="ivalor_venda" min="0.00" max="10000.00" step="0.01" placeholder="0.00">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="iciclo">CICLO DA REVISTA:</label>
+                                        <input type="number" class="form-control" name="ciclo" id="iciclo" min="0" max="100" placeholder="0" value="0">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="iquantidade">QUANTIDADE:</label>
+                                        <input type="number" class="form-control" name="quantidade" id="iquantidade" min="0" max="100" step="1" placeholder="0" value="0">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="submit" value="ADICIONAR" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMEÇO DO RODAPÉ -->
+    <footer>
+        <div class="container-fluid bg-info">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center bg-light">Desenvolvido por Matheo Henrique &copy;2024 (KL_PERFUME v0.01)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FIM DO RODAPÉ -->
+
+    <!-- INICIO Modal -->
+    <div class="modal fade" id="modalAdmin" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalLongoExemplo">MODO DE ADMINISTRADOR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a>Está aréa é restritamentente destinada a realizar alterações criticas do sistema.</a>
+                    <h6>DESEJA CONTNUAR?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" role="button" href="{% url 'controlador' %}">ENTRAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM Modal -->
+
+    <!-- INICIO Modal -->
+    <div class="modal fade" id="modalSair" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TituloModalLongoExemplo2">SAIR DO SISTEMA</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a>Certifique-se que salvou todo seu progresso.</a>
+                    <h6>DESEJA SAIR?</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" role="button" href="{% url 'sair' %}">SAIR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM Modal -->
+
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
